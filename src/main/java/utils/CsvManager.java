@@ -35,7 +35,7 @@ public class CsvManager {
         ArrayList<String> result = new ArrayList<>();
         for (List<String> list : hierarchy) {
             children.add(list.get(0).replace(". ", "."));
-            if (list.size() == 1) parents.add(null);
+            if (list.size() == 1) parents.add("-1");
             else parents.add(list.get(1).replace(". ", "."));
         }
         for (String child : children) {
