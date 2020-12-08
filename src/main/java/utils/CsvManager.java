@@ -51,7 +51,7 @@ public class CsvManager {
         return new String(charArray);
     }
 
-    public void getNamesWithSameSymbols(List<List<String>> hierarchy) {
+    public List<List<String>> getNamesWithSameSymbols(List<List<String>> hierarchy) {
         ArrayList<String> children = new ArrayList<>();
         ArrayList<String> parents = new ArrayList<>();
         HashMap<String, ArrayList<String>> mapToHash = new HashMap<>();
@@ -88,7 +88,7 @@ public class CsvManager {
         for (ArrayList<String> str : mapHashed.values()) {
             if (str.size() > 1) arrFinal.add(str);
         }
-        System.out.println(arrFinal);
+        return arrFinal;
     }
 
 }

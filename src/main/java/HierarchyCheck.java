@@ -10,7 +10,6 @@ public class HierarchyCheck {
 
         List<List<String>> hierarchy = manager.getCsvRecords("src/main/resources/data.csv");
         System.out.println(manager.getLowestHierarchyElements(hierarchy));
-
-        manager.getNamesWithSameSymbols(hierarchy);
+        System.out.println(manager.getNamesWithSameSymbols(hierarchy));
     }
 }
