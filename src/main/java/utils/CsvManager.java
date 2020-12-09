@@ -2,13 +2,17 @@ package utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CsvManager {
 
-    public List<List<String>> getCsvRecords(String path) {
+    public List<List<String>> readCsvRecords(String path) {
         List<List<String>> records = new ArrayList<>();
         try (Scanner scanner = new Scanner(new File(path))) {
+            scanner.nextLine();
             while (scanner.hasNextLine()) {
                 records.add(getRecordFromLine(scanner.nextLine()));
             }
@@ -29,7 +33,39 @@ public class CsvManager {
         return values;
     }
 
-    public ArrayList<String> getLowestHierarchyElements(List<List<String>> hierarchy) {
+    public void writeSingleLineToCsv(List<String> record, String path) {
+        try {
+            FileWriter writer = new FileWriter(path);
+            writeLineWithWriter(writer, record);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeMultipleLinesToCsv(List<List<String>> records, String path) {
+        try {
+            FileWriter writer = new FileWriter(path);
+            int i = 1;
+            for (List<String> record : records) {
+                writeLineWithWriter(writer, record);
+                if (i < records.size()) writer.write("\n");
+                i++;
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void writeLineWithWriter(FileWriter writer, List<String> record) throws IOException {
+        String collect = record.stream().collect(Collectors.joining(","));
+        writer.write(collect);
+    }
+
+
+    public List<String> getLowestHierarchyElements(List<List<String>> hierarchy) {
         ArrayList<String> children = new ArrayList<>();
         ArrayList<String> parents = new ArrayList<>();
         ArrayList<String> result = new ArrayList<>();
@@ -90,5 +126,4 @@ public class CsvManager {
         }
         return arrFinal;
     }
-
 }

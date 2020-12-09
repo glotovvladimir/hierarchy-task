@@ -5,11 +5,10 @@ import java.util.List;
 public class HierarchyCheck {
 
     public static void main(String[] args) {
-
         CsvManager manager = new CsvManager();
+        List<List<String>> hierarchy = manager.readCsvRecords("src/main/resources/data.csv");
 
-        List<List<String>> hierarchy = manager.getCsvRecords("src/main/resources/data.csv");
-        System.out.println(manager.getLowestHierarchyElements(hierarchy));
-        System.out.println(manager.getNamesWithSameSymbols(hierarchy));
+        manager.writeSingleLineToCsv(manager.getLowestHierarchyElements(hierarchy), "src/main/output/lowestHierarchyElements.csv");
+        manager.writeMultipleLinesToCsv(manager.getNamesWithSameSymbols(hierarchy), "src/main/output/sameSymbolsElements.csv");
     }
 }
