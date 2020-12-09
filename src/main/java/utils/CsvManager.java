@@ -56,14 +56,12 @@ public class CsvManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void writeLineWithWriter(FileWriter writer, List<String> record) throws IOException {
         String collect = record.stream().collect(Collectors.joining(","));
         writer.write(collect);
     }
-
 
     public List<String> getLowestHierarchyElements(List<List<String>> hierarchy) {
         ArrayList<String> children = new ArrayList<>();
